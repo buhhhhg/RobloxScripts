@@ -1960,19 +1960,6 @@ PlaceId, JobId = game.PlaceId, game.JobId
 local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
 everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
 
--- Developers for IY Reborn (EDIT we need to move this to the storage)
-devblacklist = {
-	"faceb00k_real",
-	"Femboi_real",
-	"QQQQQQQQOQQQQQQQQQOQ",
-	"FurryBoy_YT4000",
-	"BeatBanger_User",
-	"ck_2"
-}
-nsfwWhitelist = {
-
-}
-
 local isChatLegacy = (TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService)
 local chatRemote = ReplicatedStorage:FindFirstChild("SayMessageRequest", true)
 local chatChannel = not isChatLegacy and TextChatService.TextChannels.RBXGeneral
@@ -11183,22 +11170,17 @@ end)
 addcmd('headsit',{},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players) do
-		if table.find(devblacklist, Players[v].Name) ~= nil then
-			notify("Error","HEY! You cannot head sit a developer of Infinite Yield Reborn!")
-			return
-		else
-			speaker.Character:FindFirstChildOfClass('Humanoid').Sit = true
-			task.spawn(function()
-				while task.wait() do
-					if Players:FindFirstChild(Players[v].Name) and Players[v].Character ~= nil and getRoot(Players[v].Character) and getRoot(speaker.Character) and speaker.Character:FindFirstChildOfClass('Humanoid').Sit == true then
-						getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame * CFrame.Angles(0,math.rad(0),0)* CFrame.new(0,1.6,0.4)
-						getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
-					else
-						break
-					end
+		speaker.Character:FindFirstChildOfClass('Humanoid').Sit = true
+		task.spawn(function()
+			while task.wait() do
+				if Players:FindFirstChild(Players[v].Name) and Players[v].Character ~= nil and getRoot(Players[v].Character) and getRoot(speaker.Character) and speaker.Character:FindFirstChildOfClass('Humanoid').Sit == true then
+					getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame * CFrame.Angles(0,math.rad(0),0)* CFrame.new(0,1.6,0.4)
+					getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+				else
+					break
 				end
-			end)
-		end
+			end
+		end)
 	end
 end)
 
@@ -13189,17 +13171,6 @@ end)
 addcmd('uninfinity',{},function(args,speaker)
 	infinitypathtool:Disconnect()
 	infinitypathtoolenabled = false
-end)
-
-task.spawn(function()
-	xpcall(function()
-		if devblacklist[2] == "\70\101\109\98\111\105\95\114\101\97\108" then
-		else
-			TeleportService:Teleport("920587237", Players.LocalPlayer)
-		end
-	end, function()
-		TeleportService:Teleport("920587237", Players.LocalPlayer)
-	end)
 end)
 
 function bring(speaker,target,fast)
