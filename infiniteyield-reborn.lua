@@ -22,7 +22,7 @@ if IY_LOADED and not _G.IY_DEBUG == true then
 end
 
 -- yeah no there no way to enable this by using a command or somehting. scriptblox is just gay. they have to enable it manually with a one-liner. yes im talking about the is18 shit 
-pcall(function() getgenv().IY_LOADED = true; getgenv().IS18TOUSENSFWFEATURES = true end)
+pcall(function() getgenv().IY_LOADED = true end)
 
 local cloneref = cloneref or function(o) return o end
 COREGUI = cloneref(game:GetService("CoreGui"))
@@ -11365,7 +11365,6 @@ addcmd("Bang",{"rape"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
-			if IS18TOUSENSFWFEATURES then
 			execCmd("unbang")
 			task.wait()
 			isbanging = true
