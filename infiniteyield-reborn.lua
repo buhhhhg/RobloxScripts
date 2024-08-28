@@ -21,7 +21,6 @@ if IY_LOADED and not _G.IY_DEBUG == true then
 	return
 end
 
--- yeah no there no way to enable this by using a command or somehting. scriptblox is just gay. they have to enable it manually with a one-liner. yes im talking about the is18 shit 
 pcall(function() getgenv().IY_LOADED = true end)
 
 local cloneref = cloneref or function(o) return o end
@@ -11400,39 +11399,33 @@ addcmd("facebang", {"facerape","facefuck"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
-			if table.find(devblacklist, Players[v].Name) ~= nil then
-				execCmd("unbang")
-				notify("Error","HEY! You cannot bang a developer of Infinite Yield Reborn!")
-				return
-			else
-				execCmd("unbang")
-				task.wait()
-				isbanging = true
-				local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-				bangAnim = Instance.new("Animation")
-				bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-				bang = humanoid:LoadAnimation(bangAnim)
-				bang:Play(0.1, 1, 1)
-				bang:AdjustSpeed(args[2] or 2)
-				bangDied = humanoid.Died:Connect(function()
-					bang:Stop()
-					bangAnim:Destroy()
-					bangDied:Disconnect()
-					isbanging = false
-				end)
-				local bangplr = Players[v].Name
-				local bangOffet = CFrame.new(0, 2.3, -1.1)
-				task.spawn(function()
-					while task.wait() do
-						if isbanging == false then
-							break
-						end
-						local otherRoot = getTorso(Players[bangplr].Character)
-						getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
-						getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+			execCmd("unbang")
+			task.wait()
+			isbanging = true
+			local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+			bangAnim = Instance.new("Animation")
+			bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+			bang = humanoid:LoadAnimation(bangAnim)
+			bang:Play(0.1, 1, 1)
+			bang:AdjustSpeed(args[2] or 2)
+			bangDied = humanoid.Died:Connect(function()
+				bang:Stop()
+				bangAnim:Destroy()
+				bangDied:Disconnect()
+				isbanging = false
+			end)
+			local bangplr = Players[v].Name
+			local bangOffet = CFrame.new(0, 2.3, -1.1)
+			task.spawn(function()
+				while task.wait() do
+					if isbanging == false then
+						break
 					end
-				end)
-			end
+					local otherRoot = getTorso(Players[bangplr].Character)
+					getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
+					getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+				end
+			end)
 		end
 	end
 end)
