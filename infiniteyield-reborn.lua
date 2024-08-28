@@ -11358,56 +11358,41 @@ end
 -- and I. FB_REAL GET FUCKING BANNED BECAUSE OF 2 NSFW SCRIPTS ITS NOT EVEN "MORE" ITS JUST 1 EXTRA COMMAND
 -- the community is sped :broken_heart:
 
+-- dev was here!! i didnt make this btw
+
 local isbanging = false
 addcmd("Bang",{"rape"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
 			if IS18TOUSENSFWFEATURES then
-			--	if table.find(nsfwWhitelist, speaker.Name) ~= nil then
-					if table.find(devblacklist, Players[v].Name) ~= nil then
-						execCmd("unbang")
-						notify("Error","HEY! You cannot bang a developer of Infinite Yield Reborn!")
-						return
-					else
-						execCmd("unbang")
-						task.wait()
-						isbanging = true
-						local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-						bangAnim = Instance.new("Animation")
-						bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-						bang = humanoid:LoadAnimation(bangAnim)
-						bang:Play(0.1, 1, 1)
-						bang:AdjustSpeed(args[2] or 2)
-						bangDied = humanoid.Died:Connect(function()
-							bang:Stop()
-							bangAnim:Destroy()
-							bangDied:Disconnect()
-							isbanging = false
-						end)
-						local bangplr = Players[v].Name
-						local bangOffet = CFrame.new(0,0,1.1)
-						task.spawn(function()
-							while task.wait() do
-								if isbanging == false then
-									break
-								end
-								local otherRoot = getTorso(Players[bangplr].Character)
-								getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet
-								getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
-							end
-						end)
+			execCmd("unbang")
+			task.wait()
+			isbanging = true
+			local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+			bangAnim = Instance.new("Animation")
+			bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+			bang = humanoid:LoadAnimation(bangAnim)
+			bang:Play(0.1, 1, 1)
+			bang:AdjustSpeed(args[2] or 2)
+			bangDied = humanoid.Died:Connect(function()
+				bang:Stop()
+				bangAnim:Destroy()
+				bangDied:Disconnect()
+				isbanging = false
+			end)
+			local bangplr = Players[v].Name
+			local bangOffet = CFrame.new(0,0,1.1)
+			task.spawn(function()
+				while task.wait() do
+					if isbanging == false then
+						break
 					end
-			--	else
-			--		execCmd("unbang")
-			--		notify("Error","No sorry. Due to ScriptBlox banning ME.\nThe command is NOW whitelisted only!")
-			--		return
-			--	end
-			else
-				execCmd("unbang")
-				notify("Error","A global has not been set to true (IS18TOUSENSFWFEATURES)")
-				return
-			end		
+					local otherRoot = getTorso(Players[bangplr].Character)
+					getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet
+					getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+				end
+			end)
 		end
 	end
 end)
@@ -11416,51 +11401,39 @@ addcmd("facebang", {"facerape","facefuck"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
-			if IS18TOUSENSFWFEATURES then
-			--	if table.find(nsfwWhitelist, speaker.Name) ~= nil then
-					if table.find(devblacklist, Players[v].Name) ~= nil then
-						execCmd("unbang")
-						notify("Error","HEY! You cannot bang a developer of Infinite Yield Reborn!")
-						return
-					else
-						execCmd("unbang")
-						task.wait()
-						isbanging = true
-						local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-						bangAnim = Instance.new("Animation")
-						bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-						bang = humanoid:LoadAnimation(bangAnim)
-						bang:Play(0.1, 1, 1)
-						bang:AdjustSpeed(args[2] or 2)
-						bangDied = humanoid.Died:Connect(function()
-							bang:Stop()
-							bangAnim:Destroy()
-							bangDied:Disconnect()
-							isbanging = false
-						end)
-						local bangplr = Players[v].Name
-						local bangOffet = CFrame.new(0, 2.3, -1.1)
-						task.spawn(function()
-							while task.wait() do
-								if isbanging == false then
-									break
-								end
-								local otherRoot = getTorso(Players[bangplr].Character)
-								getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
-								getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
-							end
-						end)
-					end
-			--	else
-			--		execCmd("unbang")
-			--		notify("Error","No sorry. Due to ScriptBlox banning ME.\nThe command is NOW whitelisted only!")
-			--		return
-			--	end
+			if table.find(devblacklist, Players[v].Name) ~= nil then
+				execCmd("unbang")
+				notify("Error","HEY! You cannot bang a developer of Infinite Yield Reborn!")
+				return
 			else
 				execCmd("unbang")
-				notify("Error","A global has not been set to true (IS18TOUSENSFWFEATURES)")
-				return
-			end	
+				task.wait()
+				isbanging = true
+				local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+				bangAnim = Instance.new("Animation")
+				bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+				bang = humanoid:LoadAnimation(bangAnim)
+				bang:Play(0.1, 1, 1)
+				bang:AdjustSpeed(args[2] or 2)
+				bangDied = humanoid.Died:Connect(function()
+					bang:Stop()
+					bangAnim:Destroy()
+					bangDied:Disconnect()
+					isbanging = false
+				end)
+				local bangplr = Players[v].Name
+				local bangOffet = CFrame.new(0, 2.3, -1.1)
+				task.spawn(function()
+					while task.wait() do
+						if isbanging == false then
+							break
+						end
+						local otherRoot = getTorso(Players[bangplr].Character)
+						getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
+						getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+					end
+				end)
+			end
 		end
 	end
 end)
