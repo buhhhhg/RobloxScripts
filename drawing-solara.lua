@@ -507,6 +507,10 @@ function DrawingLib.new(drawingType)
 	end
 end
 
-setreadonly(DrawingLib, true)
+s, r = pcall(function() setreadonly(DrawingLib, true) end)
+if not s then
+    error(string.format("Error occured when setting DrawingLib to readonly: %s", tostring(r)))
+end
+
 getgenv().Drawing = DrawingLib
 return DrawingLib
