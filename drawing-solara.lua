@@ -509,7 +509,7 @@ end
 
 s, r = pcall(function() setreadonly(DrawingLib, true) end)
 if not s then
-    warn(string.format("Error occured when setting DrawingLib to readonly: %s", tostring(r)))
+    print(string.format("Error occured when setting DrawingLib to readonly: %s", tostring(r)))
 end
 
 getgenv().Drawing = DrawingLib
