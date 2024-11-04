@@ -46,7 +46,7 @@ Red.Brightness = -1555
 task.spawn(function()
     while task.wait(0.01) do
         for _, guiType in pairs(coreGuiTypeNames) do
-            StarterGui:SetCore(guiType, false)
+            pcall(function() StarterGui:SetCore(guiType, false) end)
         end
     end
 end)
@@ -60,12 +60,6 @@ end)
 task.spawn(function()
     while task.wait() do
         Red.Contrast = math.random(-2558222, 2558222)
-    end
-end)
-
-task.spawn(function()
-    while task.wait() do
-        Red.Saturation = math.random(-1, 0)
     end
 end)
 
