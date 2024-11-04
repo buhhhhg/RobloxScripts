@@ -1,20 +1,25 @@
-local Lighting = game:GetService("Lighting")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TextChatService = game:GetService("TextChatService")
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
-local GuiService = game:GetService("GuiService")
-local TeleportService = game:GetService("TeleportService")
-
-local LocalPlayer = Players.LocalPlayer
-
-local isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
-
-local Red = Instance.new("ColorCorrectionEffect", Lighting)
-
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
-local coreGuiTypeNames = {
+Lighting = game:GetService("Lighting")
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+TextChatService = game:GetService("TextChatService")
+Players = game:GetService("Players")
+StarterGui = game:GetService("StarterGui")
+GuiService = game:GetService("GuiService")
+TeleportService = game:GetService("TeleportService")
+
+Players.LocalPlayer.OnTeleport:Connect(function(State)
+    if queueteleport then
+        queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
+    end
+end)
+
+LocalPlayer = Players.LocalPlayer
+isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
+
+Red = Instance.new("ColorCorrectionEffect", Lighting)
+
+coreGuiTypeNames = {
     Enum.CoreGuiType.Backpack,
     Enum.CoreGuiType.PlayerList,
     Enum.CoreGuiType.EmotesMenu
@@ -33,24 +38,8 @@ function chatMessage(str)
     end
 end
 
-Players.LocalPlayer.OnTeleport:Connect(function(State)
-    if queueteleport then
-        queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
-        queueteleport("while task.wait() do warn('Thought you could escape?') end")
-    end
-
-    pcall(function() GuiService:ClearError() end)
-    local s, r = pcall(function() TeleportService:TeleportCancel() end)
-
-    if s then
-        for i=1,3 do
-            chatMessage("Nice try. You can't escape.")
-        end
-    end
-end)
-
 function randstr(length)
-    local a = ''
+    a = ''
     for i = 1, length do
         a = a .. utf8.char(math.random(50,2000))
     end
@@ -104,7 +93,7 @@ end)
 
 task.spawn(function()
     while task.wait(0.01) do
-        local Character = LocalPlayer.Character
+        Character = LocalPlayer.Character
         if Character then
             Character.Humanoid.WalkSpeed = 0
         end
@@ -113,8 +102,8 @@ end)
 
 task.spawn(function()
     while task.wait(0.01) do
-        local Character = LocalPlayer.Character
-        local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+        Character = LocalPlayer.Character
+        Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
         if Character and Humanoid then
             if Humanoid.UseJumpPower then
                 Humanoid.JumpPower = 0
