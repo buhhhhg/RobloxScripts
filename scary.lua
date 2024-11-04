@@ -37,7 +37,7 @@ function randstr(length)
     return a
 end
 
-Red.Name = randomString(10)
+Red.Name = randstr(10)
 Red.Enabled = true
 Red.Saturation = -1
 Red.Contrast = -2558222
