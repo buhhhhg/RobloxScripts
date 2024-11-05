@@ -1,5 +1,5 @@
-noFunction = function(...) end
-queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or noFunction
+noFunction = function(...) warn(`noFunction { tostring(...) }`) end
+qtp = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or queueteleport or noFunction
 
 Lighting = game:GetService("Lighting")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -11,8 +11,8 @@ TeleportService = game:GetService("TeleportService")
 CoreGui = game:GetService("CoreGui")
 
 Players.LocalPlayer.OnTeleport:Connect(function(State)
-    if queueteleport and queueteleport ~= noFunction then
-        queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
+    if qtp and qtp ~= noFunction then
+        qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
     end
 end)
 
@@ -22,13 +22,13 @@ GuiService.MenuOpened:Connect(function()
 	if #Players:GetPlayers() <= 1 then
 		Players.LocalPlayer:Kick("\nNice try. You cant escape")
 		wait()
-        if queueteleport and queueteleport ~= noFunction then
-            queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
+        if qtp and qtp ~= noFunction then
+            qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
 		end
         TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 	else
-        if queueteleport and queueteleport ~= noFunction then
-            queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
+        if qtp and qtp ~= noFunction then
+            qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
 		end
         TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 	end
@@ -76,7 +76,7 @@ Red.Brightness = -1555
 Red.TintColor = Color3.fromRGB(255, 0, 0)
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         for _, guiType in pairs(coreGuiTypeNames) do
             pcall(function() StarterGui:SetCoreGuiEnabled(guiType, false) end)
         end
@@ -114,7 +114,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         Character = LocalPlayer.Character
         if Character then
             Character.Humanoid.WalkSpeed = 0
@@ -123,7 +123,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         Character = LocalPlayer.Character
         Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
         if Character and Humanoid then
@@ -141,7 +141,7 @@ task.spawn(function()
     Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
     Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0) 
     workspace.Gravity = 0
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         Character = LocalPlayer.Character
         Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
         if Character and Humanoid then
@@ -150,8 +150,25 @@ task.spawn(function()
     end
 end)
 
+Character = LocalPlayer.Character
+if Character then
+    pcall(function() _G.oldCFrame = Character.HumanoidRootPart.CFrame end)
+end
+
+if _G.oldCFrame then
+    task.spawn(function()
+        while task.wait(0.005) do
+            Character = LocalPlayer.Character
+            Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+            if Character and Humanoid then
+                Character.HumanoidRootPart.CFrame = _G.oldCFrame
+            end
+        end
+    end)
+end
+
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         Character = LocalPlayer.Character
         if Character then
             table.foreach(Character:GetChildren(), function(_, x)
@@ -164,7 +181,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         Character = LocalPlayer.Character
         if Character then
             table.foreach(Character:GetDescendants(), function(_, x)
@@ -198,7 +215,7 @@ propertiesCG = {
 }
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         for _, gui in PlayerGui:GetDescendants() do
             for property, value in properties do
                 pcall(function() gui[property] = value end)
@@ -210,7 +227,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(0.01) do
+    while task.wait(0.005) do
         for _, gui in CoreGui:GetDescendants() do
             for property, value in propertiesCG do
                 pcall(function() gui[property] = value end)
@@ -223,7 +240,7 @@ end)
 
 if huiP then
     task.spawn(function()
-        while task.wait(0.01) do
+        while task.wait(0.005) do
             for _, gui in huiP:GetDescendants() do
                 if gui.Name ~= "RobloxGui" and not string.find("robloxgui", gui:GetFullName():lower()) then
                     for property, value in propertiesCG do
