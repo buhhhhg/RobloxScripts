@@ -1,4 +1,6 @@
-return {"SecuritybreachGreg",
+warn("Deprecated, as knifedthem & MCC have already left")
+
+theTable = {"SecuritybreachGreg",
 "BottledThem",
 "KnifedThemowo",
 "Kn1fedThem1",
@@ -64,3 +66,5 @@ return {"SecuritybreachGreg",
 "knifedthemALT_1",
 "knifedthemYTalt",
 }
+
+return theTable
