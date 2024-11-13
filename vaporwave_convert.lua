@@ -6,7 +6,7 @@ function totable(text)
 	return t
 end
 
-function convert(text)
+function vaporwave(text)
 	temp = ''
 	count = #text
 	textTable = totable(text)
@@ -20,4 +20,4 @@ function convert(text)
 	return temp
 end
 
--- uhh do funny stuff ig
+return vaporwave
