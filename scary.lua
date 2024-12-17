@@ -4,7 +4,7 @@ comments will be shown where ios skidded
 ]]
 
 noFunction = function(...) warn(`noFunction { tostring(...) }`) end
-qtp = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or queueteleport or noFunction -- skidded
+qtp = ((syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) or queueteleport) or noFunction -- skidded
 
 Lighting = game:GetService("Lighting")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -16,7 +16,7 @@ TeleportService = game:GetService("TeleportService")
 CoreGui = game:GetService("CoreGui")
 
 Players.LocalPlayer.OnTeleport:Connect(function(State) -- skidded
-    if qtp and qtp ~= noFunction then
+    if qtp then
         qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
     end
 end)
@@ -24,17 +24,11 @@ end)
 PlaceId, JobId = game.PlaceId, game.JobId
 
 GuiService.MenuOpened:Connect(function()
-	if qtp and qtp ~= noFunction then
+	if qtp then
             qtp("loadstring(game:HttpGet('https://raw.githubusercontent.com/buhhhhg/RobloxScriptz/refs/heads/main/scary.lua'))()")
 	end
 
-	if #Players:GetPlayers() <= 1 then -- skidded
-		Players.LocalPlayer:Kick("\nNice try. You cant escape")
-		task.wait()
-        	TeleportService:Teleport(PlaceId, Players.LocalPlayer)
-	else
-        	TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
-	end
+        TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 end)
 
 LocalPlayer = Players.LocalPlayer
@@ -101,18 +95,6 @@ end)
 task.spawn(function()
     while task.wait() do
         Red.Saturation = math.random(-1, 0)
-    end
-end)
-
-for i=1,3 do
-    chatMessage('You cheated. '..randstr(math.random(10, 20)))
-end
-
-task.spawn(function()
-    while task.wait(12) do
-        for i=1,3 do
-            chatMessage('You cheated. '..randstr(math.random(10, 20)))
-        end
     end
 end)
 
