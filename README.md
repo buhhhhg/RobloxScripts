@@ -1,3 +1,3 @@
-# random scripts i made
+# random scripts i made / edited
 
-scripts i made ( i didnt make infinite yield or infinite yield reborn )
+scripts i made / edited
